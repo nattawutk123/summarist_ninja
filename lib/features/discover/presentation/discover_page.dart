@@ -24,7 +24,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
     _loadBooks();
   }
 
-  void _loadBooks() async {
+  Future<void> _loadBooks() async {
     final jsonFile = await rootBundle.loadString('assets/books.json');
     final parsedJson = json.decode(jsonFile);
 
@@ -62,7 +62,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
               ),
               backgroundColor: Colors.white,
             ),
-            const RandomBookWidget(),
+            if (_books.isNotEmpty) RandomBookWidget(books: _books),
             const SizedBox(
               height: 20,
             ),

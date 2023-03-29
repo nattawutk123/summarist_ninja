@@ -63,23 +63,21 @@ class BookListWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  book.title.length > 10
-                                      ? '${book.title.substring(0, 9)}...'
-                                      : book.title,
+                                  book.title,
                                   style: const TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold,
                                   ),
+                                  maxLines: 1,
                                 ),
                                 const SizedBox(height: 2),
                                 Text(
-                                  book.author.length > 10
-                                      ? '${book.author.substring(0, 9)}...'
-                                      : book.author,
+                                  book.author,
                                   style: const TextStyle(
                                     color: Colors.grey,
                                     fontSize: 12,
                                   ),
+                                  maxLines: 1,
                                 ),
                               ],
                             ),
