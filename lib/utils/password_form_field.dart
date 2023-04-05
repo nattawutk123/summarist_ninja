@@ -1,23 +1,16 @@
 import 'package:flutter/material.dart';
 
 class PasswordFormField extends StatefulWidget {
-  final TextEditingController controller;
-  final String labelText;
-  final String? Function(String?)? validator;
-
-  const PasswordFormField({
-    Key? key,
-    required this.controller,
-    required this.labelText,
-    required this.validator,
-  }) : super(key: key);
+  const PasswordFormField({Key? key}) : super(key: key);
 
   @override
-  _PasswordFormFieldState createState() => _PasswordFormFieldState();
+  State<PasswordFormField> createState() => _PasswordFormFieldState();
 }
 
 class _PasswordFormFieldState extends State<PasswordFormField> {
   late bool _obscureText;
+  final TextEditingController _passwordController = TextEditingController();
+  final FocusNode _passwordFocusNode = FocusNode();
 
   @override
   void initState() {
@@ -28,10 +21,11 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: widget.controller,
+      controller: _passwordController,
+      focusNode: _passwordFocusNode,
       decoration: InputDecoration(
-        labelText: widget.labelText,
-        border: OutlineInputBorder(),
+        labelText: 'Password',
+        border: const OutlineInputBorder(),
         suffixIcon: GestureDetector(
           onTap: () {
             setState(() {
@@ -45,8 +39,31 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
         ),
       ),
       obscureText: _obscureText,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      validator: widget.validator,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Password field is required';
+        }
+        if (value.length < 10) {
+          return 'Password must be at least 10 characters';
+        }
+        if (!value.contains(new RegExp(r'[A-Z]'))) {
+          return 'Password must contain at least one uppercase letter';
+        }
+        if (!value.contains(new RegExp(r'[a-z]'))) {
+          return 'Password must contain at least one lowercase letter';
+        }
+        if (!value.contains(new RegExp(r'[0-9]'))) {
+          return 'Password must contain at least one number';
+        }
+        return null;
+      },
     );
+  }
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _passwordFocusNode.dispose();
+    super.dispose();
   }
 }
