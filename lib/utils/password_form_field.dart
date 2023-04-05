@@ -5,7 +5,8 @@ class PasswordFormField extends StatelessWidget {
   final bool? obscureText;
   final VoidCallback? onTap;
 
-  const PasswordFormField({Key? key, this.controller, this.obscureText, this.onTap})
+  const PasswordFormField(
+      {Key? key, this.controller, this.obscureText, this.onTap})
       : super(key: key);
 
   @override
@@ -22,13 +23,15 @@ class PasswordFormField extends StatelessWidget {
             color: Colors.grey,
           ),
         ),
+        errorMaxLines: 2,
       ),
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Password field is required';
         } else if (value.length < 10) {
           return 'Password must be at least 10 characters long';
-        } else if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])').hasMatch(value)) {
+        } else if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])')
+            .hasMatch(value)) {
           return 'Password must contain at least one uppercase letter, one lowercase letter, and one number';
         }
         return null;
