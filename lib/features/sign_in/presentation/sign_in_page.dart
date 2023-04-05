@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
+
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  late bool _obscureText;
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureText = true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,16 +58,15 @@ class SignInPage extends StatelessWidget {
                 labelText: 'Password',
                 border: const OutlineInputBorder(),
                 suffixIcon: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      _obscureText = !_obscureText;
-                    });
-                  },
-                  child: Icon(
-                    _obscureText ? Icons.visibility : Icons.visibility_off,
-                    color: Colors.grey,
-                  ),
-                ),
+                    onTap: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                    child: Icon(
+                      _obscureText ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.grey,
+                    )),
               ),
               obscureText: _obscureText,
             ),
