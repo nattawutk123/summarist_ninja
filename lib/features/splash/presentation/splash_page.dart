@@ -45,25 +45,32 @@ class _SplashPageState extends State<SplashPage>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "Summarist",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
+                  "Summarist",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  ".",
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
-            const Text(
-              ".",
-              style: TextStyle(
-                color: Colors.green,
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            const SizedBox(height: 30),
             ScaleTransition(
               scale: _animation,
-              child: const CircularProgressIndicator(),
+              child: const CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation(Colors.green)),
             ),
           ],
         ),
