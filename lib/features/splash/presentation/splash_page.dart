@@ -9,7 +9,8 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateMixin {
+class _SplashPageState extends State<SplashPage>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
 
@@ -41,9 +42,30 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ScaleTransition(
-          scale: _animation,
-          child: const CircularProgressIndicator(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              "Summarist",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 50,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Text(
+              ".",
+              style: TextStyle(
+                color: Colors.green,
+                fontSize: 50,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            ScaleTransition(
+              scale: _animation,
+              child: const CircularProgressIndicator(),
+            ),
+          ],
         ),
       ),
     );
