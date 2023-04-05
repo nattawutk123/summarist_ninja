@@ -1,69 +1,39 @@
 import 'package:flutter/material.dart';
 
-class PasswordFormField extends StatefulWidget {
-  const PasswordFormField({Key? key}) : super(key: key);
+class PasswordFormField extends StatelessWidget {
+  final TextEditingController? controller;
+  final bool? obscureText;
+  final VoidCallback? onTap;
 
-  @override
-  State<PasswordFormField> createState() => _PasswordFormFieldState();
-}
-
-class _PasswordFormFieldState extends State<PasswordFormField> {
-  late bool _obscureText;
-  final TextEditingController _passwordController = TextEditingController();
-  final FocusNode _passwordFocusNode = FocusNode();
-
-  @override
-  void initState() {
-    super.initState();
-    _obscureText = true;
-  }
+  const PasswordFormField({Key? key, this.controller, this.obscureText, this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: _passwordController,
-      focusNode: _passwordFocusNode,
+      controller: controller,
       decoration: InputDecoration(
         labelText: 'Password',
         border: const OutlineInputBorder(),
         suffixIcon: GestureDetector(
-          onTap: () {
-            setState(() {
-              _obscureText = !_obscureText;
-            });
-          },
+          onTap: onTap,
           child: Icon(
-            _obscureText ? Icons.visibility : Icons.visibility_off,
+            obscureText! ? Icons.visibility : Icons.visibility_off,
             color: Colors.grey,
           ),
         ),
       ),
-      obscureText: _obscureText,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Password field is required';
-        }
-        if (value.length < 10) {
-          return 'Password must be at least 10 characters';
-        }
-        if (!value.contains(new RegExp(r'[A-Z]'))) {
-          return 'Password must contain at least one uppercase letter';
-        }
-        if (!value.contains(new RegExp(r'[a-z]'))) {
-          return 'Password must contain at least one lowercase letter';
-        }
-        if (!value.contains(new RegExp(r'[0-9]'))) {
-          return 'Password must contain at least one number';
+        } else if (value.length < 10) {
+          return 'Password must be at least 10 characters long';
+        } else if (!RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])').hasMatch(value)) {
+          return 'Password must contain at least one uppercase letter, one lowercase letter, and one number';
         }
         return null;
       },
+      obscureText: obscureText!,
     );
-  }
-
-  @override
-  void dispose() {
-    _passwordController.dispose();
-    _passwordFocusNode.dispose();
-    super.dispose();
   }
 }
