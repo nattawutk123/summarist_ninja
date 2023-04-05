@@ -41,11 +41,22 @@ class SignInPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             TextFormField(
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Password',
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                  child: Icon(
+                    _obscureText ? Icons.visibility : Icons.visibility_off,
+                    color: Colors.grey,
+                  ),
+                ),
               ),
-              obscureText: true,
+              obscureText: _obscureText,
             ),
             const SizedBox(height: 40),
             ElevatedButton(
