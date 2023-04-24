@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import '../../../models/book.dart';
 import '../../../widgets/book_list.dart';
 import '../../../widgets/random_book.dart';

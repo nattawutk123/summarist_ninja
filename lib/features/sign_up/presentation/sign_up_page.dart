@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../../utils/email_form_field.dart';
 import '../../../utils/password_form_field.dart';
-import '../../home/presentation/home_page.dart';
+import '../../discover/presentation/discover_page.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -11,7 +14,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  late bool _obscureText;
+  bool _obscureText = true;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
@@ -21,6 +24,38 @@ class _SignUpPageState extends State<SignUpPage> {
   void initState() {
     super.initState();
     _obscureText = true;
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<bool> signUp(String email, String password) async {
+    const url = 'http://127.0.0.1:8080/auth/register';
+    final response = await http.post(
+      Uri.parse(url),
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        'email': email,
+        'password': password,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final responseData = jsonDecode(response.body);
+      final token = responseData['token'];
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('authToken', token);
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @override
@@ -72,12 +107,23 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               const SizedBox(height: 40),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const HomePage()),
-                    );
+                    bool success = await signUp(
+                        _emailController.text, _passwordController.text);
+                    if (success) {
+                      // ignore: use_build_context_synchronously
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const DiscoverPage()),
+                      );
+                    } else {
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Cannot create account.')),
+                      );
+                    }
                   }
                 },
                 style: ElevatedButton.styleFrom(
