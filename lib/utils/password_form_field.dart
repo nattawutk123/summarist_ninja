@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class PasswordFormField extends StatelessWidget {
   final TextEditingController? controller;
-  final bool? obscureText;
+  final bool obscureText;
   final VoidCallback? onTap;
 
   const PasswordFormField(
-      {Key? key, this.controller, this.obscureText, this.onTap})
+      {Key? key, this.controller, required this.obscureText, this.onTap})
       : super(key: key);
 
   @override
