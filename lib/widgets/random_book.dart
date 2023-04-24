@@ -1,11 +1,10 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'dart:convert';
 import '../models/book.dart';
 
 class RandomBookWidget extends StatefulWidget {
-  const RandomBookWidget({Key? key}) : super(key: key);
+  final List<Book> books;
+  const RandomBookWidget({Key? key, required this.books}) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -18,16 +17,13 @@ class _RandomBookWidgetState extends State<RandomBookWidget> {
   @override
   void initState() {
     super.initState();
-    loadBooks();
+    _loadRandomBook();
   }
 
-  void loadBooks() async {
-    final jsonFile = await rootBundle.loadString('assets/books.json');
-    final parsedJson = json.decode(jsonFile);
-
+  void _loadRandomBook() {
+    final randomIndex = Random().nextInt(widget.books.length);
     setState(() {
-      final randomIndex = Random().nextInt(parsedJson.length);
-      book = Book.fromJson(parsedJson[randomIndex]);
+      book = widget.books[randomIndex];
     });
   }
 

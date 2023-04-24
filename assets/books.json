@@ -1,0 +1,150 @@
+[
+    {
+      "id": 1,
+      "title": "Fifty Shades Darker",
+      "author": "E. L. James",
+      "category": "Advertising",
+      "cover_url": "https://s3.ap-northeast-1.amazonaws.com/bootcamp-tpa.images/9daf60b4bffdfe9592b69695a774141414a4142_v5.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Legend",
+      "author": "Marie Lu",
+      "category": "Advertising",
+      "cover_url": "https://s3.ap-northeast-1.amazonaws.com/bootcamp-tpa.images/918c03c623b92cf596e6c5970414141414a4142_v5.jpg"
+    },
+    {
+      "id": 3,
+      "title": "How Advertising Can Get You Your Heart's Desire",
+      "author": "Sean Carlisi",
+      "category": "Advertising",
+      "cover_url": "https://s3.ap-northeast-1.amazonaws.com/bootcamp-tpa.images/841ef5e2f3080105937616b5477444341587343.jpg"
+    },
+    {
+      "id": 4,
+      "title": "Divergent",
+      "author": "Veronica Roth",
+      "category": "Advertising",
+      "cover_url": "https://s3.ap-northeast-1.amazonaws.com/bootcamp-tpa.images/2edaee868393887597a427359414141414a4142_v5.jpg"
+    },
+    {
+      "id": 5,
+      "title": "13 Ways Businesses Could Help the Cubs Win the World Series",
+      "author": "Valencia De Ruel",
+      "category": "Business",
+      "cover_url": "https://s3.ap-northeast-1.amazonaws.com/bootcamp-tpa.images/841ef5e2f3080105937616b5477444341587343.jpg"
+    },
+    {
+      "id": 6,
+      "title": "Programming Flutter: Native, Cross-Platform Apps the Easy Way (The Pragmatic Programmers)",
+      "author": "Carmine Zaccagnino",
+      "category": "Information Technology",
+      "cover_url": "https://images-na.ssl-images-amazon.com/images/P/1680506951.01._SY400_SCLZZZZZZZ_.jpg"
+    },
+    {
+      "id": 7,
+      "title": "The C Programming Language 2nd",
+      "author": "Brian W. Kernighan, Dennis M. Ritchie",
+      "category": "Information Technology",
+      "cover_url": "https://s3.ap-northeast-1.amazonaws.com/bootcamp-tpa.images/38276ac641de69e5930626353514141414a4142_v5.jpg"
+    },
+    {
+      "id": 8,
+      "title": "Why IT is Worse than Not Getting a Rose",
+      "author": "Vandervort-Willms",
+      "category": "Information Technology",
+      "cover_url": "https://s3.ap-northeast-1.amazonaws.com/bootcamp-tpa.images/841ef5e2f3080105937616b5477444341587343.jpg"
+    },
+    {
+      "id": 9,
+      "title": "Computer Networks",
+      "author": "Andrew S. Tanenbaum, Nick Feamster, David J. Wetherall",
+      "category": "Information Technology",
+      "cover_url": "https://s3.ap-northeast-1.amazonaws.com/bootcamp-tpa.images/53a1d3f4edc60345967545a70674141414a4142_v5.jpg"
+    },
+    {
+      "id": 10,
+      "title": "The Dart Programming Language",
+      "author": "Gilad Bracha",
+      "category": "Information Technology",
+      "cover_url": "https://images-na.ssl-images-amazon.com/images/P/0321927702.01._SY400_SCLZZZZZZZ_.jpg"
+    },
+    {
+      "id": 11,
+      "title": "Python Pocket Reference",
+      "author": "Mark Lutz",
+      "category": "Information Technology",
+      "cover_url": "https://s3.ap-northeast-1.amazonaws.com/bootcamp-tpa.images/65b08a8b320f5015975556a65774141414a4142_v5.jpg"
+    },
+    {
+      "id": 12,
+      "title": "The Maze Runner",
+      "author": "James Dashner",
+      "category": "Management",
+      "cover_url": "https://s3.ap-northeast-1.amazonaws.com/bootcamp-tpa.images/d442a30b0b8c61059334b3857414141414a4142_v5.jpg"
+    },
+    {
+      "id": 13,
+      "title": "The Saturday Night Ghost Club: A Novel",
+      "author": "Craig Davidson",
+      "category": "Management",
+      "cover_url": "https://s3.ap-northeast-1.amazonaws.com/bootcamp-tpa.images/951f96707788ba6596b355974774141414a4142_v5.jpg"
+    },
+    {
+      "id": 14,
+      "title": "Fifty Shades Freed",
+      "author": "E. L. James",
+      "category": "Management",
+      "cover_url": "https://s3.ap-northeast-1.amazonaws.com/bootcamp-tpa.images/5c78478163b28f65932555661674141414a4142_v5.jpg"
+    },
+    {
+      "id": 15,
+      "title": "How Management Can Keep You from Management",
+      "author": "Misti McAulay",
+      "category": "Management",
+      "cover_url": "https://s3.ap-northeast-1.amazonaws.com/bootcamp-tpa.images/841ef5e2f3080105937616b5477444341587343.jpg"
+    },
+    {
+      "id": 16,
+      "title": "Investment Banking: Valuation, LBOs, M&A, and IPOs",
+      "author": "Joshua Rosenbaum, Joshua Pearl",
+      "category": "Money",
+      "cover_url": "https://images-na.ssl-images-amazon.com/images/P/1119706181.01._SY400_SCLZZZZZZZ_.jpg"
+    },
+    {
+      "id": 17,
+      "title": "Why Do People Think Money is a Good Idea?",
+      "author": "Jessi Caldero",
+      "category": "Money",
+      "cover_url": "https://s3.ap-northeast-1.amazonaws.com/bootcamp-tpa.images/841ef5e2f3080105937616b5477444341587343.jpg"
+    },
+    {
+      "id": 18,
+      "title": "Personal Finance for Dummies",
+      "author": " Eric Tyson",
+      "category": "Money",
+      "cover_url": "https://pics.cdn.librarything.com//picsizes/44/b1/44b19ba97daf5585970593272514141414a4142_v5.jpg"
+    },
+    {
+      "id": 19,
+      "title": "An Outline of Philosophy",
+      "author": "Bertrand Russell",
+      "category": "Philosophy",
+      "cover_url": "https://s3.ap-northeast-1.amazonaws.com/bootcamp-tpa.images/fe0ecf71d2ee5bf5979685856774141414a4142_v5.jpg"
+    },
+    {
+      "id": 20,
+      "title": "Philosophy Made Simple",
+      "author": "Richard H. Popkin",
+      "category": "Philosophy",
+      "cover_url": "https://s3.ap-northeast-1.amazonaws.com/bootcamp-tpa.images/146d25b1c44f855596c463473514141414a4142_v5.jpg"
+    },
+    {
+      "id": 21,
+      "title": "The Black Swan",
+      "author": "Nassim Nicholas Taleb",
+      "category": "Philosophy",
+      "cover_url": "https://s3.ap-northeast-1.amazonaws.com/bootcamp-tpa.images/841ef5e2f3080105937616b5477444341587343.jpg"
+    }
+  ]
+  
