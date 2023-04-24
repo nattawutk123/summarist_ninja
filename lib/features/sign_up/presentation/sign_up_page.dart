@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import '../../../utils/email_form_field.dart';
 import '../../../utils/password_form_field.dart';
-import '../../discover/presentation/discover_page.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../home/presentation/home_page.dart';
+import '../../../utils/config.dart' as config;
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -34,7 +36,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Future<bool> signUp(String email, String password) async {
-    const url = 'http://127.0.0.1:8080/auth/register';
+    const url = 'http://${config.ip}:${config.port}${config.apiRegister}';
     final response = await http.post(
       Uri.parse(url),
       headers: {
@@ -116,7 +118,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const DiscoverPage()),
+                            builder: (context) =>
+                                const HomePage(initialIndex: 0)),
                       );
                     } else {
                       // ignore: use_build_context_synchronously
