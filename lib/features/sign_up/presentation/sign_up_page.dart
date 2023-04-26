@@ -37,25 +37,29 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Future<bool> signUp(String email, String password) async {
     const url = 'http://${config.ip}:${config.port}${config.apiRegister}';
-    final response = await http.post(
-      Uri.parse(url),
-      headers: {
-        'accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode({
-        'email': email,
-        'password': password,
-      }),
-    );
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {
+          'accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'email': email,
+          'password': password,
+        }),
+      );
 
-    if (response.statusCode == 200) {
-      final responseData = jsonDecode(response.body);
-      final token = responseData['token'];
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('authToken', token);
-      return true;
-    } else {
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        final token = responseData['token'];
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('authToken', token);
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
       return false;
     }
   }
@@ -113,19 +117,20 @@ class _SignUpPageState extends State<SignUpPage> {
                   if (_formKey.currentState!.validate()) {
                     bool success = await signUp(
                         _emailController.text, _passwordController.text);
-                    if (success) {
-                      // ignore: use_build_context_synchronously
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const HomePage(initialIndex: 0)),
-                      );
-                    } else {
-                      // ignore: use_build_context_synchronously
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Cannot create account.')),
-                      );
+                    if (context.mounted) {
+                      if (success) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const HomePage(initialIndex: 0)),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text('Cannot create account.')),
+                        );
+                      }
                     }
                   }
                 },

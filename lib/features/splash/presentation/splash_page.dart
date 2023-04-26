@@ -30,16 +30,13 @@ class _SplashPageState extends State<SplashPage>
     Future.delayed(const Duration(seconds: 2), () async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('authToken');
-      if (token != null && token.isNotEmpty) {
-        // ignore: use_build_context_synchronously
+      final hasSignedIn = token != null && token.isNotEmpty;
+      final nextPage =
+          hasSignedIn ? const HomePage(initialIndex: 0) : const SignInPage();
+
+      if (context.mounted) {
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-              builder: (context) => const HomePage(initialIndex: 0)),
-        );
-      } else {
-        // ignore: use_build_context_synchronously
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const SignInPage()),
+          MaterialPageRoute(builder: (context) => nextPage),
         );
       }
     });

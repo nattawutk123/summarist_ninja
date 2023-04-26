@@ -37,29 +37,33 @@ class _SignInPageState extends State<SignInPage> {
 
   Future<bool> signIn(String email, String password) async {
     const url = 'http://${config.ip}:${config.port}${config.apiLogin}';
-    final response = await http.post(
-      Uri.parse(url),
-      headers: {
-        'accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode({
-        'email': email,
-        'password': password,
-      }),
-    );
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {
+          'accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'email': email,
+          'password': password,
+        }),
+      );
 
-    if (response.statusCode == 200) {
-      final responseData = jsonDecode(response.body);
-      final token = responseData['token'];
-      if (token.isNotEmpty) {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setString('authToken', token);
-        return true;
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        final token = responseData['token'];
+        if (token.isNotEmpty) {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setString('authToken', token);
+          return true;
+        } else {
+          return false;
+        }
       } else {
         return false;
       }
-    } else {
+    } catch (e) {
       return false;
     }
   }
@@ -117,21 +121,21 @@ class _SignInPageState extends State<SignInPage> {
                   if (_formKey.currentState!.validate()) {
                     bool success = await signIn(
                         _emailController.text, _passwordController.text);
-                    if (success) {
-                      // ignore: use_build_context_synchronously
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const HomePage(initialIndex: 0)),
-                      );
-                    } else {
-                      // ignore: use_build_context_synchronously
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text(
-                                'Oops.. something weng wrong.\nException: Invalid email or password.')),
-                      );
+                    if (context.mounted) {
+                      if (success) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const HomePage(initialIndex: 0)),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text(
+                                  'Oops.. something weng wrong.\nException: Invalid email or password.')),
+                        );
+                      }
                     }
                   }
                 },

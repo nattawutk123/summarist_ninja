@@ -83,13 +83,14 @@ class AccountPage extends StatelessWidget {
                     SharedPreferences prefs =
                         await SharedPreferences.getInstance();
                     await prefs.remove('authToken');
-                    // ignore: use_build_context_synchronously
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SignInPage()),
-                      (route) => false,
-                    );
+                    if (context.mounted) {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignInPage()),
+                        (route) => false,
+                      );
+                    }
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.white),
