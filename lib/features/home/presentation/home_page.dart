@@ -3,7 +3,9 @@ import '../../account/presentation/account_page.dart';
 import '../../discover/presentation/discover_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final int initialIndex;
+
+  const HomePage({Key? key, this.initialIndex = 0}) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -11,7 +13,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 2;
+  int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentIndex = widget.initialIndex;
+  }
 
   final List<Widget> _pages = [
     const DiscoverPage(),

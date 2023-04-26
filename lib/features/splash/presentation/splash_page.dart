@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import '../../home/presentation/home_page.dart';
 import '../../sign_in/presentation/sign_in_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -25,10 +27,18 @@ class _SplashPageState extends State<SplashPage>
       parent: _animationController,
       curve: Curves.easeInOut,
     );
-    Future.delayed(const Duration(seconds: 2), () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const SignInPage()),
-      );
+    Future.delayed(const Duration(seconds: 2), () async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('authToken');
+      final hasSignedIn = token != null && token.isNotEmpty;
+      final nextPage =
+          hasSignedIn ? const HomePage(initialIndex: 0) : const SignInPage();
+
+      if (context.mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => nextPage),
+        );
+      }
     });
   }
 

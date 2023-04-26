@@ -90,6 +90,7 @@ class _RandomBookWidgetState extends State<RandomBookWidget> {
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
                       ),
+                      maxLines: 3,
                     ),
                   ),
                 ]),
@@ -100,6 +101,7 @@ class _RandomBookWidgetState extends State<RandomBookWidget> {
                     style: const TextStyle(
                       color: Colors.white,
                     ),
+                    maxLines: 1,
                   ),
                 ]),
               ],

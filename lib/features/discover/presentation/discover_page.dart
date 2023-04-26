@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import '../../../models/book.dart';
 import '../../../widgets/book_list.dart';
 import '../../../widgets/random_book.dart';
@@ -42,42 +41,44 @@ class _DiscoverPageState extends State<DiscoverPage> {
   @override
   Widget build(BuildContext context) {
     final categories = _getCategories();
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            AppBar(
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
-                    "Discover",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 30,
-                    ),
-                  ),
-                ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text(
+              "Discover",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 30,
               ),
-              backgroundColor: Colors.white,
             ),
-            if (_books.isNotEmpty) RandomBookWidget(books: _books),
-            const SizedBox(
-              height: 20,
-            ),
-            for (final category in categories)
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                child: BookListWidget(
-                  title: category,
-                  books: _books
-                      .where((book) => book.category == category)
-                      .toList(),
-                ),
-              ),
           ],
+        ),
+        backgroundColor: Colors.white,
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (_books.isNotEmpty) RandomBookWidget(books: _books),
+              const SizedBox(
+                height: 20,
+              ),
+              for (final category in categories)
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                  child: BookListWidget(
+                    title: category,
+                    books: _books
+                        .where((book) => book.category == category)
+                        .toList(),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );

@@ -3,6 +3,10 @@ import 'package:summarist_ninja/features/sign_up/presentation/sign_up_page.dart'
 import '../../../utils/email_form_field.dart';
 import '../../../utils/password_form_field.dart';
 import '../../home/presentation/home_page.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../utils/config.dart' as config;
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -29,6 +33,39 @@ class _SignInPageState extends State<SignInPage> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  Future<bool> signIn(String email, String password) async {
+    const url = 'http://${config.ip}:${config.port}${config.apiLogin}';
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {
+          'accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'email': email,
+          'password': password,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        final token = responseData['token'];
+        if (token.isNotEmpty) {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.setString('authToken', token);
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
   }
 
   @override
@@ -80,12 +117,26 @@ class _SignInPageState extends State<SignInPage> {
               ),
               const SizedBox(height: 40),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const HomePage()),
-                    );
+                    bool success = await signIn(
+                        _emailController.text, _passwordController.text);
+                    if (context.mounted) {
+                      if (success) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const HomePage(initialIndex: 0)),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text(
+                                  'Oops.. something weng wrong.\nException: Invalid email or password.')),
+                        );
+                      }
+                    }
                   }
                 },
                 style: ElevatedButton.styleFrom(

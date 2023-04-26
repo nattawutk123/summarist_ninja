@@ -19,7 +19,7 @@ class PasswordFormField extends StatelessWidget {
         suffixIcon: GestureDetector(
           onTap: onTap,
           child: Icon(
-            obscureText! ? Icons.visibility : Icons.visibility_off,
+            obscureText ? Icons.visibility : Icons.visibility_off,
             color: Colors.grey,
           ),
         ),
@@ -36,7 +36,7 @@ class PasswordFormField extends StatelessWidget {
         }
         return null;
       },
-      obscureText: obscureText!,
+      obscureText: obscureText,
     );
   }
 }
