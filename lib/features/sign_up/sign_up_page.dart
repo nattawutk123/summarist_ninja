@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../../utils/email_form_field.dart';
-import '../../../utils/password_form_field.dart';
+import '../../utils/email_form_field.dart';
+import '../../utils/password_form_field.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../home/presentation/home_page.dart';
-import '../../../utils/config.dart' as config;
+import '../home/home_page.dart';
+import '../../utils/config.dart' as config;
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);

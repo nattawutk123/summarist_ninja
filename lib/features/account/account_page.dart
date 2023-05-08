@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../sign_in/presentation/sign_in_page.dart';
+import '../sign_in/sign_in_cubit.dart';
+import '../sign_in/sign_in_page.dart';
+import '../sign_in/sign_in_repository.dart';
 
-class AccountPage extends StatelessWidget {
-  const AccountPage({super.key});
+class AccountPage extends StatefulWidget {
+  const AccountPage({Key? key}) : super(key: key);
 
+  @override
+  _AccountPageState createState() => _AccountPageState();
+}
+
+class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -83,11 +91,16 @@ class AccountPage extends StatelessWidget {
                     SharedPreferences prefs =
                         await SharedPreferences.getInstance();
                     await prefs.remove('authToken');
-                    if (context.mounted) {
+                    if (mounted) {
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const SignInPage()),
+                          builder: (context) => BlocProvider(
+                            create: (context) =>
+                                SignInCubit(SignInRepository()),
+                            child: const SignInPage(),
+                          ),
+                        ),
                         (route) => false,
                       );
                     }

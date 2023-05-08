@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../account/presentation/account_page.dart';
-import '../../discover/presentation/discover_page.dart';
+import '../account/account_page.dart';
+import '../discover/discover_page.dart';
 
 class HomePage extends StatefulWidget {
   final int initialIndex;

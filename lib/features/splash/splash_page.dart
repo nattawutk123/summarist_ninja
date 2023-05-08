@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '../../home/presentation/home_page.dart';
-import '../../sign_in/presentation/sign_in_page.dart';
+import '../home/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../sign_in/sign_in_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
